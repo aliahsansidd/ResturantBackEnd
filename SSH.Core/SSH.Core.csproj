@@ -1,0 +1,642 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AA05C9D9-09BF-4A3D-8F5A-7F44BCB32B2C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SSH.Core</RootNamespace>
+    <AssemblyName>SSH.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CacheManager.Core, Version=1.1.2.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
+      <HintPath>..\packages\CacheManager.Core.1.1.2\lib\net45\CacheManager.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CacheManager.StackExchange.Redis, Version=1.1.2.0, Culture=neutral, PublicKeyToken=5b450b4fb65c4cdb, processorArchitecture=MSIL">
+      <HintPath>..\packages\CacheManager.StackExchange.Redis.1.1.2\lib\net45\CacheManager.StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\Recipe.Core.1.0.5\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\Recipe.Core.1.0.5\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Recipe.Core.1.0.5\lib\net45\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Recipe.Core.1.0.5\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Recipe.Core.1.0.5\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Interception.4.0.1\lib\Net45\Microsoft.Practices.Unity.Interception.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Interception.4.0.1\lib\Net45\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Recipe.Core.1.0.5\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.Storage.9.2.0\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel">
+      <HintPath>..\LocalAssemblies\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering">
+      <HintPath>..\LocalAssemblies\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering">
+      <HintPath>..\LocalAssemblies\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\LocalAssemblies\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting">
+      <HintPath>..\LocalAssemblies\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="Recipe.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Recipe.Core.1.0.5\lib\net45\Recipe.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StackExchange.Redis.StrongName, Version=1.2.6.0, Culture=neutral, PublicKeyToken=c219ff1ca8c2ce46, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.StrongName.1.2.6\lib\net45\StackExchange.Redis.StrongName.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StyleCop, Version=4.7.1000.0, Culture=neutral, PublicKeyToken=f904653c63bc2738, processorArchitecture=MSIL">
+      <HintPath>..\packages\StyleCop.4.7.55\lib\net35\StyleCop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StyleCop.CSharp, Version=4.7.1000.0, Culture=neutral, PublicKeyToken=f904653c63bc2738, processorArchitecture=MSIL">
+      <HintPath>..\packages\StyleCop.4.7.55\lib\net35\StyleCop.CSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Recipe.Core.1.0.5\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Recipe.Core.1.0.5\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Aspect\AuditLoggingAroundAdvice.cs" />
+    <Compile Include="Attribute\AuthorizeRolesAttribute.cs" />
+    <Compile Include="Attribute\CanAccessAttribute.cs" />
+    <Compile Include="Attribute\CustomAuthorize.cs" />
+    <Compile Include="Attribute\ValidationAttribute.cs" />
+    <Compile Include="Constant\BPMService.cs" />
+    <Compile Include="Constant\General.cs" />
+    <Compile Include="Constant\HttpMethods.cs" />
+    <Compile Include="Constant\Message.cs" />
+    <Compile Include="Constant\Validations.cs" />
+    <Compile Include="DTO\AmbulanceDTO.cs" />
+    <Compile Include="DTO\AmbulanceDetailsDTO.cs" />
+    <Compile Include="DTO\ApplicationTracingReportDTO.cs" />
+    <Compile Include="DTO\AccidentAndEmergencyDTO.cs" />
+    <Compile Include="DTO\BroughterDetailsDTO.cs" />
+    <Compile Include="DTO\BuildingFloorDTO.cs" />
+    <Compile Include="DTO\CatastrophicEventDTO.cs" />
+    <Compile Include="DTO\ClientGroupDTO.cs" />
+    <Compile Include="DTO\ClientTypeDTO.cs" />
+    <Compile Include="DTO\CPTCategoryDTO.cs" />
+    <Compile Include="DTO\DoctorOpdDeleteDTO.cs" />
+    <Compile Include="DTO\DoctorOpdDateDTO.cs" />
+    <Compile Include="DTO\GroupOfCompaniesDTO.cs" />
+    <Compile Include="DTO\LabSampleDTO.cs" />
+    <Compile Include="DTO\LisenceDTO.cs" />
+    <Compile Include="DTO\OrganizationalDivisionDepartmentDTO.cs" />
+    <Compile Include="DTO\OrganizationalDivisionDTO.cs" />
+    <Compile Include="DTO\OrganizationDTO.cs" />
+    <Compile Include="DTO\RacksDTO.cs" />
+    <Compile Include="DTO\BrandDTO.cs" />
+    <Compile Include="DTO\ProductChemicalDTO.cs" />
+    <Compile Include="DTO\ProductMeasurementUnitDTO.cs" />
+    <Compile Include="DTO\ProductUnitDTO.cs" />
+    <Compile Include="DTO\ProductTypeDTO.cs" />
+    <Compile Include="DTO\ProductCategoryDTO.cs" />
+    <Compile Include="DTO\DoctorOPDTimeSlotDTO.cs" />
+    <Compile Include="DTO\CompanyAccountDTO.cs" />
+    <Compile Include="DTO\InventoryItemDTO.cs" />
+    <Compile Include="DTO\LabTestSampleDTO.cs" />
+    <Compile Include="DTO\LabTestInventoryAllocationDTO.cs" />
+    <Compile Include="DTO\LabInvoiceDetailDTO.cs" />
+    <Compile Include="DTO\LabSampleTypeDTO.cs" />
+    <Compile Include="DTO\LabOutSourceDTO.cs" />
+    <Compile Include="DTO\LabTestByEditorDTO.cs" />
+    <Compile Include="DTO\LabTestOrderDetailDTO.cs" />
+    <Compile Include="DTO\CompanyAccountLevelDTO.cs" />
+    <Compile Include="DTO\LabInvoiceDTO.cs" />
+    <Compile Include="DTO\LabTestOrderDTO.cs" />
+    <Compile Include="DTO\OPDRegistrationDTO.cs" />
+    <Compile Include="DTO\AssignPasswordDTO.cs" />
+    <Compile Include="DTO\AuditDTO.cs" />
+    <Compile Include="DTO\AuditReportDTO.cs" />
+    <Compile Include="DTO\BedAllocationDTO.cs" />
+    <Compile Include="DTO\BedDTO.cs" />
+    <Compile Include="DTO\LabTestTemplateDTO.cs" />
+    <Compile Include="DTO\LabTestByValueDTO.cs" />
+    <Compile Include="DTO\LabTestBuilderDTO.cs" />
+    <Compile Include="DTO\LabTestingUnitDTO.cs" />
+    <Compile Include="DTO\IncomeGroupDTO.cs" />
+    <Compile Include="DTO\InventoryCategoryDTO.cs" />
+    <Compile Include="DTO\TestParameterDTO.cs" />
+    <Compile Include="DTO\RateSheetDTO.cs" />
+    <Compile Include="DTO\LabDepartmentServicesDTO.cs" />
+    <Compile Include="DTO\LabDepartmentDTO.cs" />
+    <Compile Include="DTO\RoomDTO.cs" />
+    <Compile Include="DTO\WardCategoryDTO.cs" />
+    <Compile Include="DTO\BuildingMaterialDTO.cs" />
+    <Compile Include="DTO\BuildingMaterialCategoryDTO.cs" />
+    <Compile Include="DTO\DeathDTO.cs" />
+    <Compile Include="DTO\BulkTrainingsDTO.cs" />
+    <Compile Include="DTO\BulkUploadDTO.cs" />
+    <Compile Include="DTO\ChangeDpStatusDTO.cs" />
+    <Compile Include="DTO\ChangeLOVStatusDTO.cs" />
+    <Compile Include="DTO\ChangeSetDTO.cs" />
+    <Compile Include="DTO\ChangeUserStatusDTO.cs" />
+    <Compile Include="DTO\CompleteJobDTO.cs" />
+    <Compile Include="DTO\DeliveryPartnerBasicInfoDTO.cs" />
+    <Compile Include="DTO\DeviceIdDTO.cs" />
+    <Compile Include="DTO\ChangeDeviceStatusDTO.cs" />
+    <Compile Include="DTO\DoctorCategoryDTO.cs" />
+    <Compile Include="DTO\ConsultancyTimingDTO.cs" />
+    <Compile Include="DTO\AppointmentDTO.cs" />
+    <Compile Include="DTO\BirthDTO.cs" />
+    <Compile Include="DTO\OPDDTO.cs" />
+    <Compile Include="DTO\DoctorOPDDTO.cs" />
+    <Compile Include="DTO\JobWithItemsDTO.cs" />
+    <Compile Include="DTO\DoctorDTO.cs" />
+    <Compile Include="DTO\PaymentSummaryDashBoardDTO.cs" />
+    <Compile Include="DTO\DriversStatusDTO.cs" />
+    <Compile Include="DTO\PatientDTO.cs" />
+    <Compile Include="DTO\PermissionDTO.cs" />
+    <Compile Include="DTO\ShipmentDetailsDTO.cs" />
+    <Compile Include="DTO\ShipmentFeedbackRatingDTO.cs" />
+    <Compile Include="DTO\UpdateDeviceTokenDTO.cs" />
+    <Compile Include="DTO\PushNotificationDTO.cs" />
+    <Compile Include="DTO\ExceptionReportDTO.cs" />
+    <Compile Include="DTO\FileDTO.cs" />
+    <Compile Include="DTO\JobsStatusDTO.cs" />
+    <Compile Include="DTO\LdapAuthenticationDTO.cs" />
+    <Compile Include="DTO\LdapAuthRolesDTO.cs" />
+    <Compile Include="DTO\LocationDTO.cs" />
+    <Compile Include="DTO\LoginDTO.cs" />
+    <Compile Include="DTO\LogoutDTO.cs" />
+    <Compile Include="DTO\LOVIdDTO.cs" />
+    <Compile Include="DTO\OneTimePinValidationDTO.cs" />
+    <Compile Include="DTO\OTPDTO.cs" />
+    <Compile Include="DTO\ProcessRequestDTO.cs" />
+    <Compile Include="DTO\RefreshTokenDTO.cs" />
+    <Compile Include="DTO\RoleDTO.cs" />
+    <Compile Include="DTO\SubStationDriversDTO.cs" />
+    <Compile Include="DTO\TotalResultDTO.cs" />
+    <Compile Include="DTO\UserCountsDTO.cs" />
+    <Compile Include="DTO\UserRoleDTO.cs" />
+    <Compile Include="DTO\UserIdDTO.cs" />
+    <Compile Include="DTO\OneTimePinDTO.cs" />
+    <Compile Include="DTO\ChangePasswordDTO.cs" />
+    <Compile Include="DTO\EmailNotificationDTO.cs" />
+    <Compile Include="DTO\ForgotPasswordDTO.cs" />
+    <Compile Include="DTO\LOVDTO.cs" />
+    <Compile Include="DTO\OldDataDTO.cs" />
+    <Compile Include="DTO\ResetPasswordLinkDTO.cs" />
+    <Compile Include="DTO\SingleValueDTO.cs" />
+    <Compile Include="DTO\UserNameDTO.cs" />
+    <Compile Include="DTO\UserPaymentReportDTO.cs" />
+    <Compile Include="DTO\UserRolePermissionDTO.cs" />
+    <Compile Include="DTO\UserSessionDTO.cs" />
+    <Compile Include="DTO\VerifyUserNameDTO.cs" />
+    <Compile Include="Entity\AccidentAndEmergency.cs" />
+    <Compile Include="Entity\AmbulanceDetails.cs" />
+    <Compile Include="Entity\Ambulance.cs" />
+    <Compile Include="Entity\BroughterDetails.cs" />
+    <Compile Include="Entity\BuildingFloor.cs" />
+    <Compile Include="Entity\CatastrophicEvent.cs" />
+    <Compile Include="Entity\ClientGroup.cs" />
+    <Compile Include="Entity\ClientType.cs" />
+    <Compile Include="Entity\CPTCategory.cs" />
+    <Compile Include="Entity\DoctorOpdDate.cs" />
+    <Compile Include="Entity\GroupOfCompanies.cs" />
+    <Compile Include="Entity\LabSample.cs" />
+    <Compile Include="Entity\Lisence.cs" />
+    <Compile Include="Entity\Organization.cs" />
+    <Compile Include="Entity\OrganizationalDivision.cs" />
+    <Compile Include="Entity\OrganizationalDivisionDepartment.cs" />
+    <Compile Include="Entity\Racks.cs" />
+    <Compile Include="Entity\Brand.cs" />
+    <Compile Include="Entity\ProductChemical.cs" />
+    <Compile Include="Entity\ProductMeasurementUnit.cs" />
+    <Compile Include="Entity\ProductUnit.cs" />
+    <Compile Include="Entity\ProductType.cs" />
+    <Compile Include="Entity\ProductCategory.cs" />
+    <Compile Include="Entity\DoctorOPDTimeSlot.cs" />
+    <Compile Include="Entity\CompanyAccount.cs" />
+    <Compile Include="Entity\CompanyAccountLevel.cs" />
+    <Compile Include="Entity\InventoryItem.cs" />
+    <Compile Include="Entity\LabTestSample.cs" />
+    <Compile Include="Entity\LabSampleType.cs" />
+    <Compile Include="Entity\LabInvoiceDetail.cs" />
+    <Compile Include="Entity\LabInvoice.cs" />
+    <Compile Include="Entity\LabOutSource.cs" />
+    <Compile Include="Entity\LabTestByEditor.cs" />
+    <Compile Include="Entity\LabTestOrderDetail.cs" />
+    <Compile Include="Entity\LabTestOrder.cs" />
+    <Compile Include="Entity\OPDRegistration.cs" />
+    <Compile Include="Entity\Audit.cs" />
+    <Compile Include="Entity\AuditDetail.cs" />
+    <Compile Include="Entity\BedAllocation.cs" />
+    <Compile Include="Entity\BuildingMaterial.cs" />
+    <Compile Include="Entity\Bed.cs" />
+    <Compile Include="Entity\LabTestTemplate.cs" />
+    <Compile Include="Entity\LabTestByValue.cs" />
+    <Compile Include="Entity\LabTestBuilder.cs" />
+    <Compile Include="Entity\LabTestingUnit.cs" />
+    <Compile Include="Entity\LabDepartmentServices.cs" />
+    <Compile Include="Entity\LabDepartment.cs" />
+    <Compile Include="Entity\IncomeGroup.cs" />
+    <Compile Include="Entity\InventoryCategory.cs" />
+    <Compile Include="Entity\LabTestInventoryAllocation.cs" />
+    <Compile Include="Entity\TestParameter.cs" />
+    <Compile Include="Entity\RateSheet.cs" />
+    <Compile Include="Entity\Room.cs" />
+    <Compile Include="Entity\WardCategory.cs" />
+    <Compile Include="Entity\BuildingMaterialCategory.cs" />
+    <Compile Include="Entity\Death.cs" />
+    <Compile Include="Entity\DoctorOPD.cs" />
+    <Compile Include="Entity\Doctor.cs" />
+    <Compile Include="Entity\OPD.cs" />
+    <Compile Include="Entity\DoctorCategory.cs" />
+    <Compile Include="Entity\ConsultancyTiming.cs" />
+    <Compile Include="Entity\Appointment.cs" />
+    <Compile Include="Entity\Birth.cs" />
+    <Compile Include="Entity\Patient.cs" />
+    <Compile Include="Entity\PushNotification.cs" />
+    <Compile Include="Entity\EmailNotification.cs" />
+    <Compile Include="Entity\OTP.cs" />
+    <Compile Include="Entity\Permission.cs" />
+    <Compile Include="Entity\UserRolePermission.cs" />
+    <Compile Include="Entity\LOV.cs" />
+    <Compile Include="Entity\UserSession.cs" />
+    <Compile Include="Enum\AccidentAndEmergencyStatus.cs" />
+    <Compile Include="Enum\AppointmentStatus.cs" />
+    <Compile Include="Enum\BedAllocationStatus.cs" />
+    <Compile Include="Enum\AgeInStatus.cs" />
+    <Compile Include="Enum\ClientGroupStatus.cs" />
+    <Compile Include="Enum\ClientTypeStatus.cs" />
+    <Compile Include="Enum\CommonActiveStatus.cs" />
+    <Compile Include="Enum\LabSampleStatus.cs" />
+    <Compile Include="Enum\LabTestPriorityStatus.cs" />
+    <Compile Include="Enum\InventoryItemStatus.cs" />
+    <Compile Include="Enum\InventoryCategoryStatus.cs" />
+    <Compile Include="Enum\IncomeGroupStatus.cs" />
+    <Compile Include="Enum\LabTestStatus.cs" />
+    <Compile Include="Enum\LabTestOrderStatus.cs" />
+    <Compile Include="Enum\DoctorOPDTimeSlotStatus.cs" />
+    <Compile Include="Enum\BirthStatus.cs" />
+    <Compile Include="Enum\DeathStatus.cs" />
+    <Compile Include="Enum\BuildingMaterialCategoryStatus.cs" />
+    <Compile Include="Enum\BedStatus.cs" />
+    <Compile Include="Enum\LabTestBuilderStatus.cs" />
+    <Compile Include="Enum\ModeOfArrivalStatus.cs" />
+    <Compile Include="Enum\RateSheetStatus.cs" />
+    <Compile Include="Enum\LabDepartmentServicesStatus.cs" />
+    <Compile Include="Enum\LabDepartmentStatus.cs" />
+    <Compile Include="Enum\DoctorOPDStatus.cs" />
+    <Compile Include="Enum\RoomStatus.cs" />
+    <Compile Include="Enum\WardCategoryStatus.cs" />
+    <Compile Include="Enum\DoctorStatus.cs" />
+    <Compile Include="Enum\DoctorCategoryStatus.cs" />
+    <Compile Include="Enum\ConsultancyTimingStatus.cs" />
+    <Compile Include="Enum\PatientStatus.cs" />
+    <Compile Include="Enum\Rating.cs" />
+    <Compile Include="Enum\WebNotificationType.cs" />
+    <Compile Include="Enum\JobStart.cs" />
+    <Compile Include="Enum\DocumentStatus.cs" />
+    <Compile Include="Enum\TrainingLevel.cs" />
+    <Compile Include="Enum\ItemTypes.cs" />
+    <Compile Include="Enum\AuthType.cs" />
+    <Compile Include="Enum\ChangeSetEntity.cs" />
+    <Compile Include="Enum\ChangeSetOperation.cs" />
+    <Compile Include="Enum\ChangeSetStatus.cs" />
+    <Compile Include="Enum\DeliveryPartnerCategories.cs" />
+    <Compile Include="Enum\DeviceAssignment.cs" />
+    <Compile Include="Enum\DeviceStatus.cs" />
+    <Compile Include="Enum\DeliveryPartnerStatus.cs" />
+    <Compile Include="Enum\JobStatus.cs" />
+    <Compile Include="Enum\JobInvitesStatus.cs" />
+    <Compile Include="Enum\JobTypes.cs" />
+    <Compile Include="Enum\DocumentTypes.cs" />
+    <Compile Include="Enum\EntityReportType.cs" />
+    <Compile Include="Enum\DashboardSummeryType.cs" />
+    <Compile Include="Enum\LOVStatus.cs" />
+    <Compile Include="Enum\LOVGroup.cs" />
+    <Compile Include="Enum\PermissionGroup.cs" />
+    <Compile Include="Enum\Template.cs" />
+    <Compile Include="Enum\UserPermission.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Helper\BlobStorageHelper.cs" />
+    <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\LocationHelper.cs" />
+    <Compile Include="Helper\ReportHelper.cs" />
+    <Compile Include="Infrastructure\ExceptionHelper.cs" />
+    <Compile Include="Infrastructure\HttpClientExtension.cs" />
+    <Compile Include="Infrastructure\IHangfireIntegeration.cs" />
+    <Compile Include="Infrastructure\ReportGenerator.cs" />
+    <Compile Include="Infrastructure\Security.cs" />
+    <Compile Include="IRepository\IAccidentAndEmergencyRepository.cs" />
+    <Compile Include="IRepository\IAmbulanceRepository.cs" />
+    <Compile Include="IRepository\IAmbulanceDetailsRepository.cs" />
+    <Compile Include="IRepository\IBroughterDetailsRepository.cs" />
+    <Compile Include="IRepository\IBuildingFloorRepository.cs" />
+    <Compile Include="IRepository\ICatastrophicEventRepository.cs" />
+    <Compile Include="IRepository\IClientGroupRepository.cs" />
+    <Compile Include="IRepository\IClientTypeRepository.cs" />
+    <Compile Include="IRepository\ICPTCategoryRepository.cs" />
+    <Compile Include="IRepository\IGroupOfCompaniesRepository.cs" />
+    <Compile Include="IRepository\ILabSampleRepository.cs" />
+    <Compile Include="IRepository\ILisenceRepository.cs" />
+    <Compile Include="IRepository\IOrganizationalDivisionDepartmentRepository.cs" />
+    <Compile Include="IRepository\IOrganizationalDivisionRepository.cs" />
+    <Compile Include="IRepository\IOrganizationRepository.cs" />
+    <Compile Include="IRepository\IRacksRepository.cs" />
+    <Compile Include="IRepository\IDoctorOPDTimeSlotRepository.cs" />
+    <Compile Include="IRepository\ICompanyAccountRepository.cs" />
+    <Compile Include="IRepository\IBrandRepository.cs" />
+    <Compile Include="IRepository\IProductMeasurementUnitRepository.cs" />
+    <Compile Include="IRepository\IProductChemicalRepository.cs" />
+    <Compile Include="IRepository\IProductUnitRepository.cs" />
+    <Compile Include="IRepository\IProductTypeRepository.cs" />
+    <Compile Include="IRepository\IProductCategoryRepository.cs" />
+    <Compile Include="IRepository\ILabInvoiceDetailRepository.cs" />
+    <Compile Include="IRepository\ILabTestSampleRepository.cs" />
+    <Compile Include="IRepository\ILabSampleTypeRepository.cs" />
+    <Compile Include="IRepository\ILabTestByEditorRepository.cs" />
+    <Compile Include="IRepository\ILabTestOrderDetailRepository.cs" />
+    <Compile Include="IRepository\ILabInvoiceRepository.cs" />
+    <Compile Include="IRepository\ILabTestOrderRepository.cs" />
+    <Compile Include="IRepository\IOPDRegistrationRepository.cs" />
+    <Compile Include="IRepository\IBedAllocationRepository.cs" />
+    <Compile Include="IRepository\IBedRepository.cs" />
+    <Compile Include="IRepository\ILabTestTemplateRepository.cs" />
+    <Compile Include="IRepository\ILabTestBuilderRepository.cs" />
+    <Compile Include="IRepository\ILabDepartmentServicesRepository.cs" />
+    <Compile Include="IRepository\ILabDepartmentRepository.cs" />
+    <Compile Include="IRepository\ILabTestByValueRepository.cs" />
+    <Compile Include="IRepository\ILabTestingUnitRepository.cs" />
+    <Compile Include="IRepository\ICompanyAccountLevelRepository.cs" />
+    <Compile Include="IRepository\IInventoryCategoryRepository.cs" />
+    <Compile Include="IRepository\IInventoryItemRepository.cs" />
+    <Compile Include="IRepository\ILabOutsourceRepository.cs" />
+    <Compile Include="IRepository\ILabTestInventoryAllocationRepository.cs" />
+    <Compile Include="IRepository\IDoctorOpdDateRepository.cs" />
+    <Compile Include="IRepository\ITestParameterRepository.cs" />
+    <Compile Include="IRepository\IRateSheetRepository.cs" />
+    <Compile Include="IRepository\IRoomRepository.cs" />
+    <Compile Include="IRepository\IIncomeGroupRepository.cs" />
+    <Compile Include="IRepository\IWardCategoryRepository.cs" />
+    <Compile Include="IRepository\IBuildingMaterialRepository.cs" />
+    <Compile Include="IRepository\IBuildingMaterialCategoryRepository.cs" />
+    <Compile Include="IRepository\IDeathRepository.cs" />
+    <Compile Include="IRepository\IDoctorCategoryRepository.cs" />
+    <Compile Include="IRepository\IDoctorOPDRepository.cs" />
+    <Compile Include="IRepository\IConsultancyTimingRepository.cs" />
+    <Compile Include="IRepository\IAppointmentRepository.cs" />
+    <Compile Include="IRepository\IOPDRepository.cs" />
+    <Compile Include="IRepository\IDoctorRepository.cs" />
+    <Compile Include="IRepository\IBirthRepository.cs" />
+    <Compile Include="IRepository\IPatientRepository.cs" />
+    <Compile Include="IRepository\IUserSessionRepository.cs" />
+    <Compile Include="IRepository\IPushNotificationRepository.cs" />
+    <Compile Include="IRepository\IOTPRepository.cs" />
+    <Compile Include="IRepository\IPermissionRepository.cs" />
+    <Compile Include="IRepository\IRoleRepository.cs" />
+    <Compile Include="IRepository\IUserRolePermissionRepository.cs" />
+    <Compile Include="IRepository\IAuditRepository.cs" />
+    <Compile Include="IRepository\IEmailNotificationRepository.cs" />
+    <Compile Include="IRepository\ILOVRepository.cs" />
+    <Compile Include="Constant\Roles.cs" />
+    <Compile Include="Enum\UserRoles.cs" />
+    <Compile Include="Infrastructure\ApplicationRoleManager.cs" />
+    <Compile Include="Infrastructure\ApplicationRoleStore.cs" />
+    <Compile Include="Infrastructure\IExceptionHelper.cs" />
+    <Compile Include="IRepository\IUserRepository.cs" />
+    <Compile Include="IService\IAccidentAndEmergencyService.cs" />
+    <Compile Include="IService\IAmbulanceService.cs" />
+    <Compile Include="IService\IAmbulanceDetailsService.cs" />
+    <Compile Include="IService\IBroughterDetailsService.cs" />
+    <Compile Include="IService\IBuildingFloorService.cs" />
+    <Compile Include="IService\ICatastrophicEventService.cs" />
+    <Compile Include="IService\IClientGroupService.cs" />
+    <Compile Include="IService\IClientTypeService.cs" />
+    <Compile Include="IService\ICPTCategoryService.cs" />
+    <Compile Include="IService\IDoctorOpdDateService.cs" />
+    <Compile Include="IService\IGroupOfCompaniesService.cs" />
+    <Compile Include="IService\ILabSampleService.cs" />
+    <Compile Include="IService\ILisenceService.cs" />
+    <Compile Include="IService\IOrganizationalDivisionDepartmentService.cs" />
+    <Compile Include="IService\IOrganizationalDivisionService.cs" />
+    <Compile Include="IService\IOrganizationService.cs" />
+    <Compile Include="IService\IProductChemicalService.cs" />
+    <Compile Include="IService\IRacksService.cs" />
+    <Compile Include="IService\IBrandService.cs" />
+    <Compile Include="IService\IProductMeasurementUnitService.cs" />
+    <Compile Include="IService\IProductUnitService.cs" />
+    <Compile Include="IService\IProductTypeService.cs" />
+    <Compile Include="IService\IProductCategoryService.cs" />
+    <Compile Include="IService\IDoctorOPDTimeSlotService.cs" />
+    <Compile Include="IService\ICompanyAccountService.cs" />
+    <Compile Include="IService\ILabTestSampleService.cs" />
+    <Compile Include="IService\ILabTestInventoryAllocationService.cs" />
+    <Compile Include="IService\IIncomeGroupService.cs" />
+    <Compile Include="IService\ILabInvoiceDetailService.cs" />
+    <Compile Include="IService\ILabSampleTypeService.cs" />
+    <Compile Include="IService\ILabTestByEditorService.cs" />
+    <Compile Include="IService\ILabTestOrderDetailService.cs" />
+    <Compile Include="IService\ILabInvoiceService.cs" />
+    <Compile Include="IService\ILabTestOrderService.cs" />
+    <Compile Include="IService\IOPDRegistrationService.cs" />
+    <Compile Include="IService\IBedAllocationService.cs" />
+    <Compile Include="IService\IBedService.cs" />
+    <Compile Include="IService\ILabTestBuilderService.cs" />
+    <Compile Include="IService\ILabDepartmentServicesService.cs" />
+    <Compile Include="IService\ILabDepartmentService.cs" />
+    <Compile Include="IService\ILabTestTemplateService.cs" />
+    <Compile Include="IService\ILabTestingUnitService.cs" />
+    <Compile Include="IService\ILabTestByValueService.cs" />
+    <Compile Include="IService\ICompanyAccountLevelService.cs" />
+    <Compile Include="IService\IInventoryCategoryService.cs" />
+    <Compile Include="IService\IInventoryItemService.cs" />
+    <Compile Include="IService\ILabOutSourceService.cs" />
+    <Compile Include="IService\ITestParameterService.cs" />
+    <Compile Include="IService\IRateSheetService.cs" />
+    <Compile Include="IService\IRoomService.cs" />
+    <Compile Include="IService\IWardCategoryService.cs" />
+    <Compile Include="IService\IBuildingMaterialService.cs" />
+    <Compile Include="IService\IBuildingMaterialCategoryService.cs" />
+    <Compile Include="IService\IDeathService.cs" />
+    <Compile Include="IService\IDoctorCategoryService.cs" />
+    <Compile Include="IService\IDoctorOPDService.cs" />
+    <Compile Include="IService\IConsultancyTimingService.cs" />
+    <Compile Include="IService\IAppointmentService.cs" />
+    <Compile Include="IService\IBirthService.cs" />
+    <Compile Include="IService\IOPDService.cs" />
+    <Compile Include="IService\IDoctorService.cs" />
+    <Compile Include="IService\IPatientService.cs" />
+    <Compile Include="IService\IUserSessionService.cs" />
+    <Compile Include="IService\IPushNotificationService.cs" />
+    <Compile Include="IService\IOTPService.cs" />
+    <Compile Include="IService\IPermissionService.cs" />
+    <Compile Include="IService\IRoleService.cs" />
+    <Compile Include="IService\IUserRolePermissionService.cs" />
+    <Compile Include="IService\IAuditService.cs" />
+    <Compile Include="IService\IAuthService.cs" />
+    <Compile Include="IService\IConfigurationService.cs" />
+    <Compile Include="DBContext\SMSAContext.cs" />
+    <Compile Include="DTO\AuthDTO.cs" />
+    <Compile Include="DTO\ILoggableDTO.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Entity\ApplicationRole.cs" />
+    <Compile Include="Entity\ApplicationUserRole.cs" />
+    <Compile Include="Entity\ApplicationUser.cs" />
+    <Compile Include="Infrastructure\ApplicationUserManager.cs" />
+    <Compile Include="Infrastructure\ApplicationUserStore.cs" />
+    <Compile Include="Infrastructure\ISSHRequestInfo.cs" />
+    <Compile Include="Infrastructure\RequestInfo.cs" />
+    <Compile Include="IoC.cs" />
+    <Compile Include="IRepository\ISMSAUnitOfWork.cs" />
+    <Compile Include="IService\IEmailNotificationService.cs" />
+    <Compile Include="IService\ILOVService.cs" />
+    <Compile Include="IService\IUserService.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\BPMServices.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BPMServices.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Mail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mail.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SSH.Common\SSH.Common.csproj">
+      <Project>{a41b3add-4ed5-4f6f-a859-c7b6ab64ea31}</Project>
+      <Name>SSH.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701231202394_AddElmah.resx">
+      <DependentUpon>201701231202394_AddElmah.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\BPMServices.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BPMServices.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Mail.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Mail.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.49.0\build\StyleCop.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets'))" />
+  </Target>
+  <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
